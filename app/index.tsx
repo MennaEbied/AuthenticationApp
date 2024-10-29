@@ -1,10 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from '@firebase/auth';
+import { LogInButton } from '../components/logInButton';
+import {useRouter} from "expo-router"
+
+
+
 
 export default function App() {
+  const router=useRouter()
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Pressable onPress={()=>router.push("/login")}><Text>Open up App.tsx to start working on your app!</Text></Pressable>
       <StatusBar style="auto" />
     </View>
   );
