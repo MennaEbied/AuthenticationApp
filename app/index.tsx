@@ -1,20 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView, Pressable } from 'react-native';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from '@firebase/auth';
-import { LogInButton } from '../components/logInButton';
-import {useRouter} from "expo-router"
+import { Text, StyleSheet } from 'react-native';
+import {useRouter} from "expo-router";
+import { LinearGradient } from 'expo-linear-gradient';
+import { theme } from '../theme';
+import { HomeScreenButton } from '../components/homeScreenButoon';
 
 
 
 
 export default function App() {
-  const router=useRouter()
+
+  const router=useRouter();
+  
   return (
-    <View style={styles.container}>
-      <Pressable onPress={()=>router.push("/login")}><Text>Open up App.tsx to start working on your app!</Text></Pressable>
+
+    <LinearGradient 
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      colors={[theme.colorBlue,theme.colorDarkBlue,theme.colorLightBlue]}
+      style={styles.container}>
+      <Text style={styles.text}>Welcome!</Text>
+      <Text style={styles.text}>Let's Start Regestring</Text>
+      <HomeScreenButton title="Regester" onPress={()=>router.push("/login")}/>
       <StatusBar style="auto" />
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -25,4 +34,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  text:{
+    color:theme.colorWhite,
+    fontSize:32,
+    textAlign:"center",
+    fontWeight:"bold"
+  }
 });
