@@ -1,12 +1,11 @@
 import {useState} from "react";
 import {useRouter} from "expo-router";
 import { View, TextInput, Text, StyleSheet } from 'react-native'; 
-import { firebase } from "@react-native-firebase/auth";
 import { LogInButton } from "../components/logInButton";
 import { theme } from "../theme";
 import { signInWithEmailAndPassword  } from 'firebase/auth';
-import {app} from "../firebaseConfig";
-import {auth} from "../firebaseConfig"
+import {auth} from "../firebaseConfig";
+import { storeUser } from "../store/authPersistance";
 
 
 
@@ -18,7 +17,9 @@ export default function LoginScreen(){
 
     const handleLogIn =async ()=>{
         try{
+            const userCredential= 
             await signInWithEmailAndPassword(auth,email,password);
+            storeUser(userCredential.user);
             router.push("/")
         }catch(error){
             console.error(error);

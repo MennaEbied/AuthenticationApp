@@ -6,6 +6,7 @@ import { LogInButton } from "../components/logInButton";
 import { theme } from "../theme";
 import {createUserWithEmailAndPassword} from "firebase/auth";
 import {auth} from "../firebaseConfig";
+import { storeUser } from "../store/authPersistance";
 
 
 export default function SignUpScreen(){
@@ -16,7 +17,8 @@ export default function SignUpScreen(){
 
     const handleSignup = async () => {
         try{
-            await createUserWithEmailAndPassword(auth,email,password);
+            const userCredential=await createUserWithEmailAndPassword(auth,email,password);
+            storeUser(userCredential.user)
             router.push("/");
         }catch(error){
             console.error(error);
